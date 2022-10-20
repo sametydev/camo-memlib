@@ -1,0 +1,23 @@
+SYS_DLL_IMPORT i64 w32_GetProcessHeap() {Kernel32.dll, GetProcessHeap}
+SYS_DLL_IMPORT void* w32_HeapAlloc(i64, i32, i64) {Kernel32.dll, HeapAlloc}
+SYS_DLL_IMPORT void* w32_HeapReAlloc(i64, i32, void*, i64) {Kernel32.dll, HeapReAlloc}
+SYS_DLL_IMPORT i8 w32_HeapFree(i64, i32, void*) {Kernel32.dll, HeapFree}
+
+i64 hProcessHeap := GetProcessHeap()
+
+//HEAP_ZERO_MEMORY its value for windows (from Win32Api)
+
+i32 HEAP_ZERO_MEMORY := 0x00000008
+i32 HEAP_REALLOC_IN_PLACE_ONLY := 0x00000010
+
+func void* Alloc(i64 Size) {
+    return w32_HeapAlloc(hProcessHeap, HEAP_ZERO_MEMORY, Size)
+}
+
+func void* ReAlloc(void* Memory, i64 NewSize) {
+    return w32_HeapReAlloc(hProcessHeap, HEAP_ZERO_MEMORY, Memory, NewSize)
+}
+
+func void Free(void* Memory) {
+    w32_HeapFree(hProcessHeap, 0, Memory)
+}
