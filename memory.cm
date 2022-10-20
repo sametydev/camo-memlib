@@ -5,7 +5,7 @@ SYS_DLL_IMPORT i8 w32_HeapFree(i64, i32, void*) {Kernel32.dll, HeapFree}
 
 i64 hProcessHeap := w32_GetProcessHeap()
 
-//HEAP_ZERO_MEMORY its value for windows (from Win32Api)
+//This values for windows (from Win32Api)
 
 i32 HEAP_ZERO_MEMORY := 0x00000008
 i32 HEAP_REALLOC_IN_PLACE_ONLY := 0x00000010
